@@ -8,19 +8,22 @@ This docs website is used for hosting recipes and tutorials
 on using JAX and PyTorch together. This is accomplished mostly through the 
 ``torchax`` library.
 
-[``torchax``](https://github.com/pytorch/xla/tree/master/torchax) 
+``torchax``_() 
 is a library for providing JAX and PyTorch interoperability.
 meaning, you can now run PyTorch and JAX in the same process, in all hardwares
 where JAX runs (including Google TPUs).
-It can be thought as:
+
+.. _torchax: https://github.com/pytorch/xla/tree/master/torchax
+
+It can be thought as either:
 * A PyTorch front-end for JAX, OR,
 * a JAX backend for PyTorch.
 
 With ``torchax`` you can:
 
 * Run PyTorch code on TPUs with as little as 2 lines of code change.
-* Call a JAX function from a PyTorch function, passing in ``jax.Array``s.
-* Call a PyTorch function from a JAX function, passing in a ``torch.Tensor``s.
+* Call a JAX function from a PyTorch function, passing in ``jax.Array`` s.
+* Call a PyTorch function from a JAX function, passing in a ``torch.Tensor`` s.
 * Use JAX features such as ``jax.grad``, ``optax``, and ``GSPMD`` to train a PyTorch model.
 * Use a PyTorch model as feature extractor and use it with a JAX model.
 
@@ -105,8 +108,8 @@ run the above model in JAX with these changes:
 
     import torch
     import torch.nn as nn
-+   import torchax
-+   torchax.enable_globally()
+  + import torchax
+  + torchax.enable_globally()
 
     class MyModel(nn.Module):
         def __init__(self):
@@ -123,9 +126,9 @@ run the above model in JAX with these changes:
             return x
 
     m = MyModel()
--   inputs = torch.randn(3, 3, 28, 28, device='cuda')
-+   inputs = torch.randn(3, 3, 28, 28, device='jax')
-+   m.to('jax')
+  - inputs = torch.randn(3, 3, 28, 28, device='cuda')
+  + inputs = torch.randn(3, 3, 28, 28, device='jax')
+  + m.to('jax')
     res = m(inputs)
 
 That is it! You are now using JAX as the backend to execute the above model.
@@ -154,8 +157,10 @@ Is it really running on JAX?
 ==============
 
 One to to see and believe that it's actually running JAX, one can verify 
-by capturing [JAX profiler traces](https://docs.jax.dev/en/latest/profiling.html) 
+by capturing `JAX profiler traces`_
 and see the JAX math running:
+
+.. _Jax profiler traces link: https://docs.jax.dev/en/latest/profiling.html
 
 .. code-block:: python
 
@@ -202,11 +207,12 @@ is not very fast. We can see from the above in the profiler, there are a lots
 of time spend in compiling XLA operations. 
 
 For people familiar with JAX, you get JAX's most performance benefits through compiling.
-In fact, as it pointed in [this github post](https://github.com/jax-ml/jax/discussions/13960),
+In fact, as it pointed in `this github post`_,
 the perfornace is day and night.
 So even though we succeeded in running the model on JAX, but we are running JAX's eager
 model. Now let's compile the model to unlock the performance benefits of JAX:
 
+.. _this github post link: https://github.com/jax-ml/jax/discussions/13960
 
 .. code-block:: python
 
