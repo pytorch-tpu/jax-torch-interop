@@ -8,7 +8,7 @@ This docs website is used for hosting recipes and tutorials
 on using JAX and PyTorch together. This is accomplished mostly through the 
 ``torchax`` library.
 
-``torchax``_() 
+torchax_ 
 is a library for providing JAX and PyTorch interoperability.
 meaning, you can now run PyTorch and JAX in the same process, in all hardwares
 where JAX runs (including Google TPUs).
@@ -160,7 +160,7 @@ One to to see and believe that it's actually running JAX, one can verify
 by capturing `JAX profiler traces`_
 and see the JAX math running:
 
-.. _Jax profiler traces link: https://docs.jax.dev/en/latest/profiling.html
+.. _Jax profiler traces: https://docs.jax.dev/en/latest/profiling.html
 
 .. code-block:: python
 
@@ -190,7 +190,7 @@ and see the JAX math running:
     import jax
     with jax.profiler.trace('/tmp/jax-trace', create_perfetto_link=True):
         res = m(inputs)
-1
+
 
 Running the above (using a Google TPU VM that I happen to have) yields:
 
@@ -212,7 +212,7 @@ the perfornace is day and night.
 So even though we succeeded in running the model on JAX, but we are running JAX's eager
 model. Now let's compile the model to unlock the performance benefits of JAX:
 
-.. _this github post link: https://github.com/jax-ml/jax/discussions/13960
+.. _this github post: https://github.com/jax-ml/jax/discussions/13960
 
 .. code-block:: python
 
